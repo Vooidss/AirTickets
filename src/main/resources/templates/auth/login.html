@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link th:href = "@{/css/login.css}" rel = "styLesheet">
+	<title>Auth</title>
+</head>
+<body>
+
+<div>
+    <section class = "header_wrap">
+        <header class = "header">
+            <a href = "#">
+                <img th:src = "@{/img/logo.png}" src = "../../static/img/logo.png" id = "logo" class = "logo" alt="">
+            </a>
+            <ul class = "menu">
+                <li><a href = "#"> Главная </a></li>
+                <li><a href = "#"> Помощь </a></li>
+                <li><img th:src = "@{/img/account.png}" src = "../../static/img/account.png" alt=""><a href = "#" class="account">Аккаунт</a></li>
+            </ul>
+        </header>
+    </section>
+</div>
+
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<form class="login" th:method="POST" th:action="@{/process_login}">
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" name = "username" class="login__input" placeholder="User name">
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+					<input type="password" name = "password" class="login__input" placeholder="Password">
+				</div>
+				<div th:if ="${param.error}" style ="color: red">
+					Неправильный имя или пароль
+				</div>
+				<button class="button login__submit">
+					<span class="button__text">Log In Now</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>				
+			</form>
+			<div class="social-login">
+				<div class="social-icons">
+					<a href="#" class="social-login__icon fab fa-instagram"></a>
+					<a href="#" class="social-login__icon fab fa-facebook"></a>
+					<a href="#" class="social-login__icon fab fa-twitter"></a>
+				</div>
+			</div>
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
+	</div>
+</div>
+
+</body>
+</html>
