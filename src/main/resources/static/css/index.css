@@ -1,0 +1,159 @@
+*{
+    padding:0; margin: 0;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between ;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    max-width: 2600px;
+    margin: 0 auto;
+    background-color: #6582aa;
+}
+
+.box{
+    width: 120px;
+    height: 30px;
+    border: 1px solid #999;
+    font-size: 18px;
+    color: #1c87c9;
+    background-color: #eee;
+    border-radius: 5px;
+    box-shadow: 4px 4px #ccc;
+}
+
+.menu{
+    display: flex;
+    list-style: none;
+    max-width: 2600px;
+    align-items: center;
+}
+
+.menu li{
+    margin-left: 50px;
+    padding-right: 20px;
+}
+
+.menu li a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.menu li a:hover{
+    color: #FA4A0C;
+}
+
+.buying_tickets_wrap{
+    background: url('../img/background.jpg') center center no-repeat;
+    background-size: cover;
+    padding: 75px 0 145px 0;
+    max-height: 670px;
+}
+
+
+.main_div{
+    color: #262c3d;
+    text-align: center;
+    max-width: 1080px;
+    min-width: 320px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.first_slogan{
+    font-weight: 900; font-size: 3rem; line-height: 6rem; margin-bottom: 20px;
+}
+.second_slogan{
+    font-weight: 900; font-size: 1.5rem; line-height: 2rem; margin-bottom: 20px;
+}
+
+
+.ticket_selection{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2px;
+    max-width: 1240px;
+    position: relative;
+    width: 100%;
+}
+
+.buying_tickects {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-sending{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 2px;
+}
+
+
+.sending{
+    display: flex;
+    margin: 2px;
+}
+
+.main_window_buying_tickets{
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    border-radius: 5px;
+}
