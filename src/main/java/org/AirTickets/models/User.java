@@ -2,8 +2,10 @@ package org.AirTickets.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,11 +23,9 @@ public class User {
     private int id;
 
     @Column(name = "name")
-    @NotNull
     private String name;
 
     @Column(name = "surname")
-    @NotNull
     private String surname;
 
     @Column(name = "patronymic")
@@ -33,6 +33,18 @@ public class User {
 
     @NotNull
     @Column(name = "password")
+    @Size(min = 8, max = 8, message = "Пароль должен быть восьмизначным")
     private String password;
+
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "login")
+    @NotNull
+    private String login;
+
+    @Transient
+    private String NSP;
 
 }

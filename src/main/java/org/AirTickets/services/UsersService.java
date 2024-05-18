@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -31,13 +32,26 @@ public class UsersService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = usersRepository.findByName(username);
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        Optional<User> users = usersRepository.findByLogin(login);
 
-        if(user.isEmpty()){
+        if(users.isEmpty()){
             throw new UsernameNotFoundException("User not found!");
         }
 
-        return new UsersDetails(user.get());
+        return new UsersDetails(users.get());
+    }
+
+    public User splittingSNP(User user){
+        List<String> snp = Arrays.stream(user.getNSP().split(" ")).toList();
+
+        user.setName(snp.get(0));
+        user.setSurname(snp.get(1));
+
+        if(snp.size() == 3) {
+            user.setPatronymic(snp.get(2));
+        }
+
+        return user;
     }
 }

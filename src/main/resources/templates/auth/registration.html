@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link th:href = "@{/css/login.css}" href = "../../static/css/login.css" rel = "styLesheet">
+	<link th:href = "@{/css/registration.css}" href = "../../static/css/registration.css" rel = "styLesheet">
 	<title>Auth</title>
 </head>
 <body>
@@ -26,23 +26,32 @@
 <div class="container">
 	<div class="screen">
 		<div class="screen__content">
-			<form class="login" th:method="POST" th:action="@{/process_login}">
+			<form class="login" th:method="POST" th:action="@{/auth/registration}" th:object="${user}">
+				<button href = "/templates/auth/login.html" id = "firstbut" class="button login__submit2">
+					<span class="button__text">Войти</span>
+				</button>
 				<div class="login__field">
 					<i class="login__icon fas fa-user"></i>
-					<input type="text" name = "username" class="login__input" placeholder="Login">
+					<input type="text" th:field="*{login}" name = "username" class="login__input" placeholder="Login">
+					<div th:if="${#fields.hasErrors('login')}" th:errors="*{login}" style="color: red">Пользователь с таким логином уже существует</div>
+				</div>
+                <div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" th:field="*{NSP}" name = "fio" class="login__input" placeholder="ФИО">
 				</div>
 				<div class="login__field">
 					<i class="login__icon fas fa-lock"></i>
-					<input type="password" name = "password" class="login__input" placeholder="Password">
+					<input  name = "email" th:field="*{email}" class="login__input" placeholder="Email">
 				</div>
-				<div th:if ="${param.error}" style ="color: red">
-					Неправильный имя или пароль
+                <div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" th:field="*{password}" name = "password" class="login__input" placeholder="Password">
+					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red">Пароль должен быть восьмизначным</div>
 				</div>
 				<button class="button login__submit">
-					<span class="button__text">Log In Now</span>
+					<span class="button__text">Зарегистрироваться</span>
 					<i class="button__icon fas fa-chevron-right"></i>
 				</button>
-				<p class="message">Not registered?<a href="/templates/auth/registration.html" th:href = "@{/auth/registration}">    Create an account</a></p>
 			</form>
 			<div class="social-login">
 				<div class="social-icons">

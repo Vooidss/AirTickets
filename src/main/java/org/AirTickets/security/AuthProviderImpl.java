@@ -1,7 +1,6 @@
 package org.AirTickets.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,13 +25,13 @@ public class AuthProviderImpl implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-        String username = authentication.getName();
+        String login = authentication.getName();
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(login);
 
         String password = authentication.getCredentials().toString();
 
-        System.out.println(username + userDetails.getUsername());
+        System.out.println(login + userDetails.getUsername());
         System.out.println(password + userDetails.getPassword());
 
         if(!password.equals(userDetails.getPassword())){
