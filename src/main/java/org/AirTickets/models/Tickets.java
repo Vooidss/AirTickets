@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "tickets")
 @Getter
@@ -18,6 +16,11 @@ public class Tickets {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "owner_id",referencedColumnName = "id")
+    private User owner;
 
     @NotNull
     @ManyToOne

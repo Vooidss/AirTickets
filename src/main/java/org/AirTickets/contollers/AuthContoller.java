@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.AirTickets.models.User;
 import org.AirTickets.services.RegistrationService;
 import org.AirTickets.services.UsersService;
+import org.AirTickets.util.JWTutil;
 import org.AirTickets.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,13 +44,13 @@ public class AuthContoller {
     @PostMapping("/registration")
     public String addUserInDb(@ModelAttribute("user") @Valid User user,
                               BindingResult bindingResult){
+
+
         if(!(user.getLogin().isEmpty())) {
 
             user = usersService.splittingSNP(user);
 
             userValidator.validate(user, bindingResult);
-            Map<String, Object> errors = bindingResult.getModel();
-            errors.keySet().forEach(s -> System.out.println(errors.get(s)));
 
             if (bindingResult.hasErrors()) {
                 return "auth/registration";
@@ -57,7 +58,6 @@ public class AuthContoller {
 
             registrationService.register(user);
 
-            System.out.println("Отработал");
         }
             return "auth/login";
     }

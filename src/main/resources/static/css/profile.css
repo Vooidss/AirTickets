@@ -1,0 +1,120 @@
+*{
+    padding:0; margin: 0;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.5;
+    font-size: 1rem;
+    background:linear-gradient(270deg,#6299eb, #293ba5,#1a02a5);
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between ;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    max-width: 2600px;
+    margin: 0 auto;
+    background-color: #6582aa;
+}
+
+.menu{
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.menu li{
+    margin-left: 50px;
+    padding-right: 20px;
+}
+
+.menu li a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.menu li a:hover{
+    color: #FA4A0C;
+}
+
+.box {
+    text-align:start;
+}
+
+
+.emp-profile{
+    padding: 3%;
+    border-radius: 2rem;
+    background: #fff;
+    width: 40em;
+    position: relative;
+    margin: 250px 450px;
+    height: auto;
+    
+}
+
+.field{ 
+    display: inline-block;
+    height: 10px;
+    
+    padding: 20px;
+}
+
+.field-label{
+    display:inline-block;
+}
+
+.user-info div {
+    margin-bottom: 10px;
+  }
+
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;;
+    padding: 2%;
+    font-weight: 600;
+    color: #7f8c97;
+    cursor: pointer;
+    padding: 8px 16px;
+    border: 1px solid #333;
+}
+
+.header_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-head{
+    list-style: none;
+    font-weight:400;
+}
+
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+
+.login__input {
+	border: none;
+	border-bottom: 2px solid #D1D1D4;
+	background: none;
+	padding: 10px;
+	padding-left: 24px;
+	font-weight: 700;
+	width: 75%;
+	transition: .2s;
+}
+
+.login__input:active,
+.login__input:focus,
+.login__input:hover {
+	outline: none;
+	border-bottom-color: #6A679E;
+}

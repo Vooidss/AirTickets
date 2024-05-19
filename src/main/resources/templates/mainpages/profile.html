@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link th:href = "@{/css/profile.css}" href = "../../static/css/profile.css" rel = "styLesheet">
+
+<title>Auth</title>
+</head>
+<body>
+
+<div>
+    <section class = "header_wrap">
+        <header class = "header">
+            <a href = "#">
+                <img th:src = "@{/img/logo.png}" src = "../../static/img/logo.png" id = "logo" class = "logo" alt="">
+            </a>
+            <ul class = "menu">
+                <li><a href = "#"> Главная </a></li>
+                <li><a href = "#"> Помощь </a></li>
+                <li><a href = "#" class="account">Аккаунт</a></li>
+            </ul>
+        </header>
+    </section>
+</div>
+<div class="emp-profile">
+            <form method="POST" th:object="${user}" th:action="@{/profile}">
+                <div class="header_container">
+                    <div >
+                        <div class="profile-head">
+                            <p th:text="*{login}">
+                                Login
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                    </div>
+                </div>
+
+                <div >
+                    <div>
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class = "box">
+                                            <div class = "field-label">
+                                                <label>User Id</label>
+                                            </div>
+                                            <div class = "field">
+                                                <p th:text="*{id}">id</p>
+                                            </div>
+                                        </div>
+                                        <div class = "box">
+                                            <div class = "field-label">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class = "field">
+                                                <input th:field="*{nsp}" placeholder="ФИО" class="login__input">
+                                            </div>
+                                        </div>
+                                        <div class = "box" >
+                                            <div class = "field-label">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class = "field">
+                                                <input th:field="*{email}" placeholder="Email" class="login__input">
+                                            </div>
+                                        </div>
+                                        <div class = "box">
+                                            <div class = "field-label">
+                                                <label>Phone</label>
+                                            </div>
+                                            <div class = "field">
+                                                <input placeholder="Номер телефона" class="login__input">
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
+
+</body>
+</html>

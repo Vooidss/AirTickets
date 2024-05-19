@@ -31,15 +31,12 @@ public class AuthProviderImpl implements AuthenticationProvider {
 
         String password = authentication.getCredentials().toString();
 
-        System.out.println(login + userDetails.getUsername());
-        System.out.println(password + userDetails.getPassword());
-
         if(!password.equals(userDetails.getPassword())){
             throw new BadCredentialsException("Incorrect password");
         }
 
 
-        return new UsernamePasswordAuthenticationToken(userDetails,password, Collections.emptyList()); //TODO Сделать список прав
+        return new UsernamePasswordAuthenticationToken(userDetails,password, Collections.emptyList());
     }
 
     @Override

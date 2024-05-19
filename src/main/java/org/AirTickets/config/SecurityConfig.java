@@ -7,6 +7,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -35,16 +36,16 @@ public class SecurityConfig{
                 "/img/logo.png","/img/account.png"
         );
 
-        return http.csrf().disable()
+        return http
                 .authorizeRequests()// Настраивается авторизация ( до and )
                 .requestMatchers(listWithAllAllowedLinks.toArray(new String[0])).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/auth/login") // Настраивается страница логина
-                .loginProcessingUrl("/process_login")
-                .defaultSuccessUrl("/buy_ticket",true)
-                .failureUrl("/auth/login?error")
-                .and()
+                .formLogin( form -> form
+                        .loginPage("/auth/login")
+                        .loginProcessingUrl("/process_login")
+                        .defaultSuccessUrl("/buy_ticket",true)
+                        .failureUrl("/auth/login?error"))
                 .build();
     }
     @Bean
@@ -52,12 +53,12 @@ public class SecurityConfig{
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 
         provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(getPasswordEncoder());
         return provider;
     }
 
-
     @Bean
     public PasswordEncoder getPasswordEncoder(){
-         return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }

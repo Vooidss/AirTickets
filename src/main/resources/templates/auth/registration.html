@@ -17,7 +17,7 @@
             <ul class = "menu">
                 <li><a href = "#"> Главная </a></li>
                 <li><a href = "#"> Помощь </a></li>
-                <li><img th:src = "@{/img/account.png}" src = "../../static/img/account.png" alt=""><a href = "#" class="account">Аккаунт</a></li>
+                <li><a href = "#" class="account">Аккаунт</a></li>
             </ul>
         </header>
     </section>
@@ -27,13 +27,14 @@
 	<div class="screen">
 		<div class="screen__content">
 			<form class="login" th:method="POST" th:action="@{/auth/registration}" th:object="${user}">
+				<input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
 				<button href = "/templates/auth/login.html" id = "firstbut" class="button login__submit2">
 					<span class="button__text">Войти</span>
 				</button>
 				<div class="login__field">
 					<i class="login__icon fas fa-user"></i>
 					<input type="text" th:field="*{login}" name = "username" class="login__input" placeholder="Login">
-					<div th:if="${#fields.hasErrors('login')}" th:errors="*{login}" style="color: red">Пользователь с таким логином уже существует</div>
+					<div th:if="${#fields.hasErrors('login')}" th:errors="*{login}" style="color: red">Error password</div>
 				</div>
                 <div class="login__field">
 					<i class="login__icon fas fa-user"></i>
@@ -46,7 +47,6 @@
                 <div class="login__field">
 					<i class="login__icon fas fa-user"></i>
 					<input type="text" th:field="*{password}" name = "password" class="login__input" placeholder="Password">
-					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red">Пароль должен быть восьмизначным</div>
 				</div>
 				<button class="button login__submit">
 					<span class="button__text">Зарегистрироваться</span>
@@ -69,6 +69,5 @@
 		</div>		
 	</div>
 </div>
-
 </body>
 </html>

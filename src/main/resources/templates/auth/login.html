@@ -17,7 +17,7 @@
             <ul class = "menu">
                 <li><a href = "#"> Главная </a></li>
                 <li><a href = "#"> Помощь </a></li>
-                <li><img th:src = "@{/img/account.png}" src = "../../static/img/account.png" alt=""><a href = "#" class="account">Аккаунт</a></li>
+                <li><a href = "#" class="account">Аккаунт</a></li>
             </ul>
         </header>
     </section>
@@ -27,6 +27,7 @@
 	<div class="screen">
 		<div class="screen__content">
 			<form class="login" th:method="POST" th:action="@{/process_login}">
+				<input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
 				<div class="login__field">
 					<i class="login__icon fas fa-user"></i>
 					<input type="text" name = "username" class="login__input" placeholder="Login">
@@ -38,8 +39,8 @@
 				<div th:if ="${param.error}" style ="color: red">
 					Неправильный имя или пароль
 				</div>
-				<button class="button login__submit">
-					<span class="button__text">Log In Now</span>
+				<button type = "submit" class="button login__submit">
+					<span type = "submit" class="button__text">Войти</span>
 					<i class="button__icon fas fa-chevron-right"></i>
 				</button>
 				<p class="message">Not registered?<a href="/templates/auth/registration.html" th:href = "@{/auth/registration}">    Create an account</a></p>

@@ -31,6 +31,10 @@ public class UsersService implements UserDetailsService {
         usersRepository.save(user);
     }
 
+    public void update(User user){
+        usersRepository.save(user);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         Optional<User> users = usersRepository.findByLogin(login);
@@ -45,8 +49,8 @@ public class UsersService implements UserDetailsService {
     public User splittingSNP(User user){
         List<String> snp = Arrays.stream(user.getNSP().split(" ")).toList();
 
-        user.setName(snp.get(0));
-        user.setSurname(snp.get(1));
+        user.setSurname(snp.get(0));
+        user.setName(snp.get(1));
 
         if(snp.size() == 3) {
             user.setPatronymic(snp.get(2));

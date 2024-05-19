@@ -20,7 +20,7 @@
             <ul class = "menu">
                 <li><a href = "#"> Главная </a></li>
                 <li><a href = "#"> Помощь </a></li>
-                <li><img th:src = "@{/img/account.png}" alt=""><a href = "#" class="account">Аккаунт</a></li>
+                <li><a href = "#" th:href = "@{/profile}" class="account">Аккаунт</a></li>
             </ul>
         </header>
     </section>
@@ -39,6 +39,7 @@
 
                 <div class="buying_tickects">
                     <form id="one-way-form" th:method="POST" th:object="${ticket}">
+                        <input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <div class="form-group">
                             <label for="city">Выбрать город</label>
                             <select id = "city" th:field="*{sendingCity}" name="city" class="form-control">
@@ -66,6 +67,7 @@
                     </form>
 
                     <form id="round-trip-form" style="display: none;" th:method="POST" th:object="${ticket}">
+                        <input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <div class="form-group">
                             <label for="city_two">Выбрать город</label>
                             <select id = "city_two" name="cityy" th:field="*{sendingCity}" class="form-control">

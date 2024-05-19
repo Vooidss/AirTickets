@@ -33,7 +33,6 @@ public class User {
 
     @NotNull
     @Column(name = "password")
-    @Size(min = 8, max = 8, message = "Пароль должен быть восьмизначным")
     private String password;
 
 
@@ -44,7 +43,17 @@ public class User {
     @NotNull
     private String login;
 
+    @OneToMany(mappedBy = "owner")
+    private List<Tickets> tickets;
+
     @Transient
     private String NSP;
+
+    public String getNSP(){
+        return NSP;
+    }
+    public String getNsp(){
+        return surname + " " + name + " " + patronymic;
+    }
 
 }
