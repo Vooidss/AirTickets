@@ -34,13 +34,13 @@ public class ProfileController {
 
         return "/mainpages/profile";
     }
-    @PostMapping
+    @PatchMapping("/edit")
     public String edit(@ModelAttribute("user") @Valid User user,
                        BindingResult bindingResult){
 
         user = usersService.splittingSNP(user);
         usersService.update(user);
 
-        return "redirect:/profile";
+        return "/mainpages/profile";
     }
 }

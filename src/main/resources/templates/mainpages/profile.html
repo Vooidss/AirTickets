@@ -16,7 +16,7 @@
                 <img th:src = "@{/img/logo.png}" src = "../../static/img/logo.png" id = "logo" class = "logo" alt="">
             </a>
             <ul class = "menu">
-                <li><a href = "#"> Главная </a></li>
+                <li><a th:href = "@{/buy_ticket}"> Главная </a></li>
                 <li><a href = "#"> Помощь </a></li>
                 <li><a href = "#" class="account">Аккаунт</a></li>
             </ul>
@@ -24,7 +24,8 @@
     </section>
 </div>
 <div class="emp-profile">
-            <form method="POST" th:object="${user}" th:action="@{/profile}">
+            <form th:method="PATCH" th:object="${user}" th:action="@{/profile/edit}">
+                <input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
                 <div class="header_container">
                     <div >
                         <div class="profile-head">
@@ -37,6 +38,10 @@
                         <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
                     </div>
                 </div>
+
+                <input type="hidden" th:field="*{login}">
+                <input type="hidden" th:field="*{password}">
+                <input type="hidden" th:field="*{id}">
 
                 <div >
                     <div>
@@ -55,7 +60,7 @@
                                                 <label>Name</label>
                                             </div>
                                             <div class = "field">
-                                                <input th:field="*{nsp}" placeholder="ФИО" class="login__input">
+                                                <input th:field="*{NSP}" placeholder="ФИО" class="login__input">
                                             </div>
                                         </div>
                                         <div class = "box" >
@@ -71,14 +76,14 @@
                                                 <label>Phone</label>
                                             </div>
                                             <div class = "field">
-                                                <input placeholder="Номер телефона" class="login__input">
+                                                <input th:field="*{phone}" placeholder="Номер телефона" class="login__input">
                                             </div>
                                         </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>           
+            </form>
         </div>
 
 </body>
