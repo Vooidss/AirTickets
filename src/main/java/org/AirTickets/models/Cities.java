@@ -1,5 +1,6 @@
 package org.AirTickets.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -27,9 +28,11 @@ public class Cities {
     @JoinColumn(name = "country_id",referencedColumnName = "id")
     private Countries country;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sendingCity")
     private List<Tickets> sendingCity;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "arrivalCity")
     private List<Tickets> arrivalCity;
 
