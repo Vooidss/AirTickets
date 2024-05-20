@@ -26,9 +26,7 @@ public class ProfileController {
     @GetMapping
     public String showInfo(Model model){
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UsersDetails usersDetails = (UsersDetails) authentication.getPrincipal();
-        User user = usersDetails.getUser();
+        User user = usersService.getAuthUser();
 
         model.addAttribute("user",user);
 

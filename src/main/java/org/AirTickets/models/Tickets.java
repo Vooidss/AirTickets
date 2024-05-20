@@ -2,9 +2,12 @@ package org.AirTickets.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "tickets")
@@ -17,7 +20,6 @@ public class Tickets {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "owner_id",referencedColumnName = "id")
     private User owner;
@@ -35,12 +37,27 @@ public class Tickets {
     @NotNull
     @Column(name = "sendingdate")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String sendingDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date sendingDate;
 
     @Column(name = "arrivaldate")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String arrivalDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date arrivalDate;
 
+    @Column(name = "countpeople")
+    @NotNull()
+    private int countpeople;
+
+    @Override
+    public String toString() {
+        return "Tickets{" +
+                "id=" + id +
+                ", owner=" + owner.getLogin() +
+                ", sendingCity=" + sendingCity +
+                ", arrivalCity=" + arrivalCity +
+                ", sendingDate=" + sendingDate +
+                ", arrivalDate=" + arrivalDate +
+                '}';
+    }
 }

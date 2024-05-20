@@ -44,7 +44,7 @@ public class SecurityConfig{
                 .formLogin( form -> form
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/process_login")
-                        .defaultSuccessUrl("/buy_ticket",true)
+                        .defaultSuccessUrl("/mainpage",true)
                         .failureUrl("/auth/login?error"))
                 .build();
     }

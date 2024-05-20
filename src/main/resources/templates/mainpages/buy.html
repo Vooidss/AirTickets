@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link th:href = "@{/css/profile.css}" href = "../../static/css/profile.css" rel = "styLesheet">
+	<link th:href = "@{/css/buy.css}" href = "../../static/css/buy.css" rel = "styLesheet">
 
-<title>Профиль</title>
+<title>Покупка билета</title>
 </head>
 <body>
 
@@ -24,64 +24,76 @@
     </section>
 </div>
 <div class="emp-profile">
-            <form th:method="PATCH" th:object="${user}" th:action="@{/profile/edit}">
+            <form th:method="POST" th:object="${ticket}">
                 <input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
                 <div class="header_container">
                     <div >
                         <div class="profile-head">
-                            <p th:text="*{login}">
-                                Login
+                            <p th:text="*{id}">
+                                Номер билета
                             </p>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Купить билет"/>
                     </div>
                 </div>
 
-                <input type="hidden" th:field="*{login}">
-                <input type="hidden" th:field="*{password}">
+                <input type="hidden" th:field="*{owner}">
                 <input type="hidden" th:field="*{id}">
 
-                <div >
+                <div>
                     <div>
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class = "box">
                                             <div class = "field-label">
-                                                <label>User Id</label>
+                                                <label>Место вылета</label>
                                             </div>
                                             <div class = "field">
-                                                <p th:text="*{id}">id</p>
-                                            </div>
-                                        </div>
-                                        <div class = "box">
-                                            <div class = "field-label">
-                                                <label>Name</label>
-                                            </div>
-                                            <div class = "field">
-                                                <input th:field="*{NSP}" placeholder="ФИО" class="login__input">
+                                                <p th:field="*{arrivalCity}">Место вылета</p>
                                             </div>
                                         </div>
                                         <div class = "box" >
                                             <div class = "field-label">
-                                                <label>Email</label>
+                                                <label>Место прибытия</label>
                                             </div>
                                             <div class = "field">
-                                                <input th:field="*{email}" placeholder="Email" class="login__input">
+                                                <p th:field="*{sendingCity}">Место вылета</p>
                                             </div>
                                         </div>
                                         <div class = "box">
                                             <div class = "field-label">
-                                                <label>Phone</label>
+                                                <label>Дата вылета</label>
                                             </div>
                                             <div class = "field">
-                                                <input th:field="*{phone}" placeholder="Номер телефона" class="login__input">
+                                                <p th:field="*{arrivalDate}">Дата вылета</p>
+                                            </div>
+                                        </div>
+                                        <div class = "box">
+                                            <div class = "field-label">
+                                                <label>Дата возвращения</label>
+                                            </div>
+                                            <div class = "field">
+                                                <p th:field="*{sendingDate}">Дата возвращения</p>
+                                            </div>
+                                        </div>
+                                        <div class = "box">
+                                            <div class = "field-label">
+                                                <label>Количество пассажиров</label>
+                                            </div>
+                                            <div class = "field">
+                                                <p th:field="*{countpeople}">Количество пассажиров</p>
                                             </div>
                                         </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="header_container_down">
+                        <div>
+                            <p placeholder="сумма" class = "login__input">2000 руб</p>
+                        </div>
                 </div>
             </form>
         </div>

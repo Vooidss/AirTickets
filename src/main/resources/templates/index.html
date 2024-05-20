@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href = "@{/css/index.css}" href = "/static/css/index.css" rel = "styLesheet">
-    <script type = "text/javascript" th:src = "@{/js/index.js}"></script>
+    <script type = "text/javascript" th:src = "@{/js/index.js}" src = "../static/js/index.js"></script>
     <title>Главная страница</title>
 </head>
 
@@ -15,7 +15,7 @@
     <section class = "header_wrap">
         <header class = "header">
             <a href = "#">
-                <img th:src = "@{/img/logo.png}" id = "logo" class = "logo" alt="">
+                <img th:src = "@{/img/logo.png}" src = "../static/img/logo.png" id = "logo" class = "logo" alt="">
             </a>
             <ul class = "menu">
                 <li><a href = "#"> Главная </a></li>
@@ -38,29 +38,37 @@
                 </div>
 
                 <div class="buying_tickects">
-                    <form id="one-way-form" th:method="POST" th:object="${ticket}">
+                    <form id="one-way-form" th:method="POST" th:object="${ticket}" th:action="@{/mainpage}">
                         <input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <input type="hidden" th:field="*{owner}">
                         <div class="form-group">
-                            <label for="city">Выбрать город</label>
-                            <select id = "city" th:field="*{sendingCity}" name="city" class="form-control">
-                                <option th:each="cityy : ${cities}" th:value = "${cityy.getId()}"
-                                        th:text = "${cityy.toString()}"></option>
+                            <div class = "box">
+                                <label for="first-list" class = "text-form-group">Место вылета</label>
+                            </div>
+                            <select th:field="*{arrivalCity}" id="first-list" class="form-control">
+                                <option th:each="cityy : ${cities}" th:value="${cityy.getId()}" th:text="${cityy.toString()}"></option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="arrival-city">Выбрать город</label>
-                            <select th:field="*{arrivalCity}" type="text" class="form-control" id="arrival-city" name="arrival-city" required>
-                                <option th:each="cityy : ${cities}" th:value = "${cityy.getId()}"
-                                        th:text = "${cityy.toString()}"></option>
+                            <div class = "box">
+                                <label for="second-list" class = "text-form-group">Место прибытия</label>
+                            </div>
+                            <select th:field="*{sendingCity}" id="second-list" class="form-control">
+                                <option th:each="cityy : ${cities}" th:value="${cityy.getId()}" th:text="${cityy.toString()}"></option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="departure-date">Дата отправки:</label>
+                        <div class = "box">
+                            <label for="departure-date" class = "text-form-group">Дата отправки</label>
+                        </div>
                             <input type="date" th:field="*{sendingDate}" class="form-control" id="departure-date" name="departure-date" required>
                         </div>
                         <div class="form-group">
-                            <label for="passenger-count">Количество людей:</label>
-                            <input type="number" th:field="*{arrivalDate}" class="form-control" id="passenger-count" name="passenger-count" required>
+                            <div class = "box">
+                                <label for="passenger-count" class = "text-form-group">Количество людей</label>
+                            </div>
+                            <input th:field="*{countpeople}" type="number" class="form-control" id="passenger-count" name="passenger-count" required>
+                            <div th:if="${#fields.hasErrors('countpeople')}" th:errors="*{countpeople}" style="color: red">Error password</div>
                         </div>
 
                         <button type="submit" class="btn btn-primary" value="Отправить">Отправить</button>
@@ -69,37 +77,46 @@
                     <form id="round-trip-form" style="display: none;" th:method="POST" th:object="${ticket}">
                         <input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <div class="form-group">
-                            <label for="city_two">Выбрать город</label>
-                            <select id = "city_two" name="cityy" th:field="*{sendingCity}" class="form-control">
-                                <option th:each="cityy : ${cities}" th:value = "${cityy.getId()}"
-                                        th:text = "${cityy.toString()}"></option>
+                            <div class = "box">
+                                <label for="first-list-swap" class = "text-form-group">Место вылета</label>
+                            </div>
+                            <select th:field="*{arrivalCity}" id="first-list-swap" class="form-control">
+                                <option th:each="cityy : ${cities}" th:value="${cityy.getId()}" th:text="${cityy.toString()}"></option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="arrival-city-two">Выбрать город</label>
-                            <select th:field="*{arrivalCity}" class="form-control" id="arrival-city-two" name="arrival-city" required>
-                                <option th:each="cityy : ${cities}" th:value = "${cityy.getId()}"
-                                        th:text = "${cityy.toString()}"></option>
+                            <div class = "box">
+                                <label for="second-list-swap" class = "text-form-group">Место прибытия</label>
+                            </div>
+                                <select th:field="*{sendingCity}" id="second-list-swap" class="form-control">
+                                <option th:each="cityy : ${cities}" th:value="${cityy.getId()}" th:text="${cityy.toString()}"></option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="departure-date-two">Дата отправки:</label>
-                            <input type="date" th:field="*{sendingDate}" class="form-control" id="departure-date-two" name="departure-date" required>
+                            <div class = "box">
+                                <label for="departure-date-two" class = "text-form-group">Дата отправки</label>
+                            </div>
+                                <input type="date" th:field="*{sendingDate}" class="form-control" id="departure-date-two" name="departure-date" required>
                         </div>
                         <div class="form-group">
-                            <label for="return-date">Дата вылета обратно:</label>
+                            <div class = "box">
+                                <label for="return-date" class = "text-form-group">Дата вылета обратно</label>
+                            </div>
                             <input type="date" th:field="*{arrivalDate}" class="form-control" id="return-date" name="return-date" required>
                         </div>
                         <div class="form-group">
-                            <label for="passenger-count">Количество людей:</label>
-                            <input type="number" class="form-control" id="passenger-count" name="passenger-count" required>
+                            <div class = "box">
+                                <label for="passenger-count" class = "text-form-group">Количество людей</label>
+                            </div>
+                                <input th:field="*{countpeople}" type="number" class="form-control" id="passenger-count" name="passenger-count" required>
+                                <div th:if="${#fields.hasErrors('countpeople')}" th:errors="*{countpeople}" style="color: red">Error password</div>
                         </div>
                         <button type="submit" class="btn btn-primary">Отправить</button>
                     </form>
                 </div>
             </div>
         </div>
-
+        <a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a>
     </section>
 
 </div>

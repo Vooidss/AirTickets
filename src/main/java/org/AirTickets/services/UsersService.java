@@ -5,6 +5,8 @@ import org.AirTickets.Repositories.UsersRepository;
 import org.AirTickets.models.User;
 import org.AirTickets.security.UsersDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,6 +35,13 @@ public class UsersService implements UserDetailsService {
 
     public void update(User user){
         usersRepository.save(user);
+    }
+
+    public User getAuthUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UsersDetails usersDetails = (UsersDetails) authentication.getPrincipal();
+
+        return usersDetails.getUser();
     }
 
     @Override
