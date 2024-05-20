@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -30,6 +31,10 @@ public class TicketsService{
 
     public void save(Tickets tickets){
         ticketsRepository.save(tickets);
+    }
+
+    public String getPrice(){
+        return 1000 + new Random().nextInt((20000 - 1000 + 1)) + " руб";
     }
 
     public Date converDate(String dateString) throws ParseException {

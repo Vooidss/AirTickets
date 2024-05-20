@@ -31,16 +31,16 @@
             <h2 class = second_slogan>Скорей купи билеты и лети вместе с нами</h2>
 
             <div class = "main_window_buying_tickets">
-
                 <div class = "sending">
                     <button id = "firstbut" type="button" class="btn btn-sending" onclick="showOneWayForm()">Туда</button>
                     <button id = "secondbut" type="button" class="btn btn-sending" onclick="showRoundTripForm()">Туда и обратно</button>
                 </div>
 
                 <div class="buying_tickects">
-                    <form id="one-way-form" th:method="POST" th:object="${ticket}" th:action="@{/mainpage}">
+                    <form id="one-way-form" th:method="GET" th:object="${ticket}" th:action="@{/mainpage/buy_ticket}">
                         <input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <input type="hidden" th:field="*{owner}">
+                        <input type="hidden" th:field="*{price}">
                         <div class="form-group">
                             <div class = "box">
                                 <label for="first-list" class = "text-form-group">Место вылета</label>

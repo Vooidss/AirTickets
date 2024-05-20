@@ -49,15 +49,21 @@ public class Tickets {
     @NotNull()
     private int countpeople;
 
+    @Column(name = "price")
+    private String price;
+
+
     @Override
     public String toString() {
         return "Tickets{" +
                 "id=" + id +
                 ", owner=" + owner.getLogin() +
-                ", sendingCity=" + sendingCity +
-                ", arrivalCity=" + arrivalCity +
+                ", sendingCity=" + sendingCity.getName() +
+                ", arrivalCity=" + arrivalCity.getName() +
                 ", sendingDate=" + sendingDate +
                 ", arrivalDate=" + arrivalDate +
+                ", countpeople=" + countpeople +
+                ", price='" + price + '\'' +
                 '}';
     }
 }

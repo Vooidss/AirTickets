@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/mainpage")
+@SessionAttributes("ticket")
 public class TicketsContollers {
 
     private final CitiesService citiesService;
@@ -31,51 +32,54 @@ public class TicketsContollers {
         this.ticketsValidator = ticketsValidator;
     }
 
+
+    @ModelAttribute("ticket")
+    public Tickets getTicket() {
+        User user = usersService.getAuthUser();
+        Tickets ticket = new Tickets();
+        ticket.setOwner(user);
+        return ticket;
+    }
+
+
     @GetMapping()
     public String index(Model model){
 
         //Создание нового билета
         Tickets tickets = new Tickets();
+        User user = usersService.getAuthUser();
+        tickets.setOwner(user);
 
         model.addAttribute("ticket",tickets);
         model.addAttribute("cities",citiesService.findAll());
 
         return "index";
     }
-
-
-    @PostMapping()
-    public String save(@ModelAttribute("ticket") @Valid Tickets tickets,
-                        BindingResult bindingResult){
+    @GetMapping("/buy_ticket")
+    private String buyTicket(@ModelAttribute("ticket") @Valid Tickets tickets,
+                             BindingResult bindingResult){
 
         ticketsValidator.validate(tickets,bindingResult);
 
-        if(bindingResult.hasErrors()){
-            return "index";
-        }
-
-        //Берем авторизованного пользователя
         User user = usersService.getAuthUser();
-
         tickets.setOwner(user);
-
-        return "mainpages/buy";
-    }
-
-    @GetMapping("/buy_ticket")
-    private String buyTicket(@ModelAttribute("ticket") @Valid Tickets tickets){
-
-        System.out.println(tickets.toString());
+        tickets.setPrice(ticketsService.getPrice());
 
         return "mainpages/buy";
     }
 
     @PostMapping("/buy_ticket")
-    public String showInfoTicket(@ModelAttribute("ticket") @Valid Tickets tickets,
-                       BindingResult bindingResult){
+    public String showInfoTicket(@ModelAttribute("ticket") Tickets ticket){
+
+
+        User user = usersService.getAuthUser();
+        ticket.setOwner(user);
 
         System.out.println("работает");
+        System.out.println(ticket.toString());
 
-        return "mainpages/buy";
+        ticketsService.save(ticket);
+
+        return "index";
     }
 }
