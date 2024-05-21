@@ -1,7 +1,6 @@
 package org.AirTickets.util;
 
-import jakarta.persistence.Column;
-import org.AirTickets.models.Tickets;
+import org.AirTickets.Entity.Tickets;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

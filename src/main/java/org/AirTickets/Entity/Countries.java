@@ -1,4 +1,4 @@
-package org.AirTickets.models;
+package org.AirTickets.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

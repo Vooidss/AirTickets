@@ -2,7 +2,7 @@ package org.AirTickets.services;
 
 import jakarta.transaction.Transactional;
 import org.AirTickets.Repositories.UsersRepository;
-import org.AirTickets.models.User;
+import org.AirTickets.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,5 +24,12 @@ public class RegistrationService
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         usersRepository.save(user);
+    }
+
+    @Transactional
+    public String register(String password){
+        passwordEncoder.encode(password);
+
+        return password;
     }
 }

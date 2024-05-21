@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href = "@{/css/index.css}" href = "/static/css/index.css" rel = "styLesheet">
-    <script type = "text/javascript" th:src = "@{/js/index.js}" src = "../static/js/index.js"></script>
+    <link  href = "/css/index.css" rel = "styLesheet">
+    <script src = "/js/index.js" type = "text/javascript"></script>
     <title>Главная страница</title>
 </head>
 
@@ -15,12 +15,12 @@
     <section class = "header_wrap">
         <header class = "header">
             <a href = "#">
-                <img th:src = "@{/img/logo.png}" src = "../static/img/logo.png" id = "logo" class = "logo" alt="">
+                <img src = "/img/logo.png" id = "logo" class = "logo" alt="">
             </a>
             <ul class = "menu">
                 <li><a href = "#"> Главная </a></li>
                 <li><a href = "#"> Помощь </a></li>
-                <li><a href = "#" th:href = "@{/profile}" class="account">Аккаунт</a></li>
+                <li><a href = "#" class="account">Аккаунт</a></li>
             </ul>
         </header>
     </section>
@@ -37,79 +37,76 @@
                 </div>
 
                 <div class="buying_tickects">
-                    <form id="one-way-form" th:method="GET" th:object="${ticket}" th:action="@{/mainpage/buy_ticket}">
-                        <input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                        <input type="hidden" th:field="*{owner}">
-                        <input type="hidden" th:field="*{price}">
+                    <form id="one-way-form">
                         <div class="form-group">
                             <div class = "box">
                                 <label for="first-list" class = "text-form-group">Место вылета</label>
                             </div>
-                            <select th:field="*{arrivalCity}" id="first-list" class="form-control">
-                                <option th:each="cityy : ${cities}" th:value="${cityy.getId()}" th:text="${cityy.toString()}"></option>
+                            <select id="first-list" class="form-control">
+
                             </select>
                         </div>
                         <div class="form-group">
                             <div class = "box">
                                 <label for="second-list" class = "text-form-group">Место прибытия</label>
                             </div>
-                            <select th:field="*{sendingCity}" id="second-list" class="form-control">
-                                <option th:each="cityy : ${cities}" th:value="${cityy.getId()}" th:text="${cityy.toString()}"></option>
+                            <select  id="second-list" class="form-control">
+
                             </select>
                         </div>
                         <div class="form-group">
                         <div class = "box">
                             <label for="departure-date" class = "text-form-group">Дата отправки</label>
                         </div>
-                            <input type="date" th:field="*{sendingDate}" class="form-control" id="departure-date" name="departure-date" required>
+                            <input type="date"  class="form-control" id="departure-date" name="departure-date" required>
                         </div>
                         <div class="form-group">
                             <div class = "box">
                                 <label for="passenger-count" class = "text-form-group">Количество людей</label>
                             </div>
-                            <input th:field="*{countpeople}" type="number" class="form-control" id="passenger-count" name="passenger-count" required>
-                            <div th:if="${#fields.hasErrors('countpeople')}" th:errors="*{countpeople}" style="color: red">Error password</div>
+                            <input type="number" class="form-control" id="passenger-count" name="passenger-count" required>
+
                         </div>
 
                         <button type="submit" class="btn btn-primary" value="Отправить">Отправить</button>
                     </form>
 
                     <form id="round-trip-form" style="display: none;" th:method="POST" th:object="${ticket}">
-                        <input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
                         <div class="form-group">
                             <div class = "box">
                                 <label for="first-list-swap" class = "text-form-group">Место вылета</label>
                             </div>
-                            <select th:field="*{arrivalCity}" id="first-list-swap" class="form-control">
-                                <option th:each="cityy : ${cities}" th:value="${cityy.getId()}" th:text="${cityy.toString()}"></option>
+                            <select id="first-list-swap" class="form-control">
+                                <option ></option>
                             </select>
                         </div>
                         <div class="form-group">
                             <div class = "box">
                                 <label for="second-list-swap" class = "text-form-group">Место прибытия</label>
                             </div>
-                                <select th:field="*{sendingCity}" id="second-list-swap" class="form-control">
-                                <option th:each="cityy : ${cities}" th:value="${cityy.getId()}" th:text="${cityy.toString()}"></option>
+                                <select id="second-list-swap" class="form-control">
+                                <option ></option>
                             </select>
                         </div>
                         <div class="form-group">
                             <div class = "box">
                                 <label for="departure-date-two" class = "text-form-group">Дата отправки</label>
                             </div>
-                                <input type="date" th:field="*{sendingDate}" class="form-control" id="departure-date-two" name="departure-date" required>
+                                <input type="date" class="form-control" id="departure-date-two" name="departure-date" required>
                         </div>
                         <div class="form-group">
                             <div class = "box">
                                 <label for="return-date" class = "text-form-group">Дата вылета обратно</label>
                             </div>
-                            <input type="date" th:field="*{arrivalDate}" class="form-control" id="return-date" name="return-date" required>
+                            <input type="date" class="form-control" id="return-date" name="return-date" required>
                         </div>
                         <div class="form-group">
                             <div class = "box">
                                 <label for="passenger-count" class = "text-form-group">Количество людей</label>
                             </div>
-                                <input th:field="*{countpeople}" type="number" class="form-control" id="passenger-count" name="passenger-count" required>
-                                <div th:if="${#fields.hasErrors('countpeople')}" th:errors="*{countpeople}" style="color: red">Error password</div>
+                                <input  type="number" class="form-control" id="passenger-count" name="passenger-count" required>
+
                         </div>
                         <button type="submit" class="btn btn-primary">Отправить</button>
                     </form>

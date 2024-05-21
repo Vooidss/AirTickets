@@ -1,16 +1,11 @@
-package org.AirTickets.models;
+package org.AirTickets.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
 
-import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 @Entity

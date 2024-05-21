@@ -1,6 +1,5 @@
 package org.AirTickets;
 
-import org.AirTickets.models.Cities;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

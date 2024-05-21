@@ -2,8 +2,8 @@ package org.AirTickets.contollers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
-import org.AirTickets.models.Tickets;
-import org.AirTickets.models.User;
+import org.AirTickets.Entity.Tickets;
+import org.AirTickets.Entity.User;
 import org.AirTickets.services.CitiesService;
 import org.AirTickets.services.TicketsService;
 import org.AirTickets.services.UsersService;
@@ -94,7 +94,7 @@ public class TicketsContollers {
     @GetMapping("/test/{id}")
     private String test(@PathVariable("id") int id) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(new File("src/main/resources/static/json/infoTicket.json"), ticketsService.findById(id));
+        objectMapper.writeValue(new File("src/main/resources/static/json/infoTicket.json"),  ticketsService.findById(id));
         return "mainpages/buy";
     }
 

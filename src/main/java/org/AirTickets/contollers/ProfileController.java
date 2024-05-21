@@ -1,7 +1,7 @@
 package org.AirTickets.contollers;
 
 import jakarta.validation.Valid;
-import org.AirTickets.models.User;
+import org.AirTickets.Entity.User;
 import org.AirTickets.security.UsersDetails;
 import org.AirTickets.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;

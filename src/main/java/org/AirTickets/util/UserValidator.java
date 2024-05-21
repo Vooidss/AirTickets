@@ -1,7 +1,7 @@
 package org.AirTickets.util;
 
 import org.AirTickets.Repositories.UsersRepository;
-import org.AirTickets.models.User;
+import org.AirTickets.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
