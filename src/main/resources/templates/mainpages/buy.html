@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link th:href = "@{/css/buy.css}" href = "../../static/css/buy.css" rel = "styLesheet">
+    <script src = "../../static/js/outputInformation.js" defer></script>
 
 <title>Покупка билета</title>
 </head>
@@ -29,7 +30,7 @@
                 <div class="header_container">
                     <div >
                         <div class="profile-head">
-                            <p th:field="*{owner}" th:text="*{owner.getNSP()}">
+                            <p id = "buyer" th:text="*{owner.getNSP()}">
                                 Покупатель
                             </p>
                         </div>
@@ -38,7 +39,7 @@
                         <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Купить билет"/>
                     </div>
                 </div>
-                <input type="hidden" th:field="*{id}">
+                <input type="hidden">
 
                 <div>
                     <div>
@@ -49,7 +50,7 @@
                                                 <label>Место вылета</label>
                                             </div>
                                             <div class = "field">
-                                                <p th:field="*{arrivalCity}" th:text = "*{arrivalCity}">Место вылета</p>
+                                                <p id = "arrivalCity">Место вылета</p>
                                             </div>
                                         </div>
                                         <div class = "box" >
@@ -57,7 +58,7 @@
                                                 <label>Место прибытия</label>
                                             </div>
                                             <div class = "field">
-                                                <p th:field="*{sendingCity}" th:text = "*{sendingCity}">Место вылета</p>
+                                                <p id = "sendingCity">Место вылета</p>
                                             </div>
                                         </div>
                                         <div class = "box">
@@ -65,7 +66,7 @@
                                                 <label>Дата вылета</label>
                                             </div>
                                             <div class = "field">
-                                                <p th:field="*{arrivalDate}" th:text = "*{arrivalDate}">Дата вылета</p>
+                                                <p id = "arrivalDate">Дата вылета</p>
                                             </div>
                                         </div>
                                         <div class = "box">
@@ -73,7 +74,7 @@
                                                 <label>Дата возвращения</label>
                                             </div>
                                             <div class = "field">
-                                                <p th:field="*{sendingDate}" th:text = "*{sendingDate}">Дата возвращения</p>
+                                                <p id = "sendingDate">Дата возвращения</p>
                                             </div>
                                         </div>
                                         <div class = "box">
@@ -81,7 +82,7 @@
                                                 <label>Количество пассажиров</label>
                                             </div>
                                             <div class = "field">
-                                                <p th:field="*{countpeople}" th:text ="*{countpeople}">Количество пассажиров</p>
+                                                <p id = "countpeople" >Количество пассажиров</p>
                                             </div>
                                         </div>
                             </div>
@@ -90,7 +91,7 @@
                 </div>
                 <div class="header_container_down">
                         <div>
-                            <p th:field="*{price}" th:text = "*{price}" placeholder="сумма" class = "login__input">сумма</p>
+                            <p id = "price" th:field="*{price}" th:text = "*{price}" placeholder="сумма" class = "login__input">сумма</p>
                         </div>
                 </div>
             </form>

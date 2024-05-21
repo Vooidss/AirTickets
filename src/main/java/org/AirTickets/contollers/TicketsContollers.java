@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
 
 @Controller
 @RequestMapping("/mainpage")
@@ -93,11 +91,11 @@ public class TicketsContollers {
         return "index";
     }
 
-    @ResponseBody
     @GetMapping("/test/{id}")
-    private void test(@PathVariable("id") int id) throws IOException {
+    private String test(@PathVariable("id") int id) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(new File("src/main/resources/static/json/infoTicket.json"), ticketsService.findById(id));
+        return "mainpages/buy";
     }
 
 }

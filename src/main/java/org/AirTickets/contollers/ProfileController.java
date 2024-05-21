@@ -41,4 +41,13 @@ public class ProfileController {
 
         return "/mainpages/profile";
     }
+
+    @ResponseBody
+    @GetMapping("/showUserInfo")
+    public String showUserInfo(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UsersDetails usersDetails = (UsersDetails)authentication.getPrincipal();
+
+        return usersDetails.getUsername();
+    }
 }

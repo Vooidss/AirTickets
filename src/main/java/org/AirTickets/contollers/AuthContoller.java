@@ -1,34 +1,36 @@
 package org.AirTickets.contollers;
 
 import jakarta.validation.Valid;
+import org.AirTickets.DTO.UserDTO;
 import org.AirTickets.models.User;
 import org.AirTickets.services.RegistrationService;
 import org.AirTickets.services.UsersService;
 import org.AirTickets.util.JWTutil;
 import org.AirTickets.util.UserValidator;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/auth")
 public class AuthContoller {
 
     private final UserValidator userValidator;
     private final RegistrationService registrationService;
     private final UsersService usersService;
+    private final ModelMapper modelMapper;
+    private final JWTutil jwTutil;
 
-    @Autowired
-    public AuthContoller(UserValidator userValidator, RegistrationService registrationService, UsersService usersService) {
+    public AuthContoller(UserValidator userValidator, RegistrationService registrationService, UsersService usersService,
+                         ModelMapper modelMapper, JWTutil jwTutil) {
         this.userValidator = userValidator;
         this.registrationService = registrationService;
         this.usersService = usersService;
+        this.modelMapper = modelMapper;
+        this.jwTutil = jwTutil;
     }
 
     @GetMapping("/login")
@@ -42,23 +44,27 @@ public class AuthContoller {
     }
 
     @PostMapping("/registration")
-    public String addUserInDb(@ModelAttribute("user") @Valid User user,
+    public Map<String,String> addUserInDb(@RequestBody @Valid UserDTO userDTO,
                               BindingResult bindingResult){
+        User user = convertToUser(userDTO);
 
+        user = usersService.splittingSNP(user);
+        System.out.println(user.toString());
 
-        if(!(user.getLogin().isEmpty())) {
+        userValidator.validate(user, bindingResult);
 
-            user = usersService.splittingSNP(user);
-
-            userValidator.validate(user, bindingResult);
-
-            if (bindingResult.hasErrors()) {
-                return "auth/registration";
-            }
-
-            registrationService.register(user);
-
+        if (bindingResult.hasErrors()) {
+            bindingResult.getModel().keySet().forEach(s -> System.out.println(bindingResult.getModel().get(s)));
+            return Map.of("message","Ошибка!");
         }
-            return "auth/login";
+
+        registrationService.register(user);
+
+        String token = jwTutil.generateToken(user.getLogin());
+        return Map.of("jwt-token", token);
+    }
+
+    public User convertToUser(UserDTO userDTO){
+        return this.modelMapper.map(userDTO,User.class);
     }
 }

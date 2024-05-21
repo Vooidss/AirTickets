@@ -54,4 +54,19 @@ public class User {
 
     @Column(name = "phone")
     private String phone;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
+                ", NSP='" + NSP + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }

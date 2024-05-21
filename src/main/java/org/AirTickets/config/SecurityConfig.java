@@ -6,13 +6,13 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
@@ -21,9 +21,11 @@ public class SecurityConfig{
     //Настраивает аунтификацию
 
      private final UserDetailsService userDetailsService;
+     private final JWTFilter jwtFilter;
 
-    public SecurityConfig(UserDetailsService userDetailsService) {
+    public SecurityConfig(UserDetailsService userDetailsService, JWTFilter jwtFilter) {
         this.userDetailsService = userDetailsService;
+        this.jwtFilter = jwtFilter;
     }
 
     @Bean
@@ -37,6 +39,7 @@ public class SecurityConfig{
         );
 
         return http
+                .csrf().disable()
                 .authorizeRequests()// Настраивается авторизация ( до and )
                 .requestMatchers(listWithAllAllowedLinks.toArray(new String[0])).permitAll()
                 .anyRequest().authenticated()
@@ -46,7 +49,11 @@ public class SecurityConfig{
                         .loginProcessingUrl("/process_login")
                         .defaultSuccessUrl("/mainpage",true)
                         .failureUrl("/auth/login?error"))
+                .sessionManagement( sessian -> sessian
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
+
     }
     @Bean
     public AuthenticationProvider authenticationProvider(){
