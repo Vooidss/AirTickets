@@ -1,9 +1,8 @@
 package org.AirTickets.contollers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
-import org.AirTickets.Entity.Tickets;
-import org.AirTickets.Entity.User;
+import org.AirTickets.models.Tickets;
+import org.AirTickets.models.User;
 import org.AirTickets.services.CitiesService;
 import org.AirTickets.services.TicketsService;
 import org.AirTickets.services.UsersService;
@@ -14,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/mainpage")
@@ -77,7 +74,7 @@ public class TicketsContollers {
     }
 
     @PostMapping("/buy_ticket")
-    public String showInfoTicket(@ModelAttribute("ticket") Tickets ticket){
+    public String showInfoTicket(@ModelAttribute("ticket") Tickets ticket,Model model){
 
 
         User user = usersService.getAuthUser();
@@ -88,14 +85,8 @@ public class TicketsContollers {
 
         ticketsService.save(ticket);
 
+        model.addAttribute("cities",citiesService.findAll());
+
         return "index";
     }
-
-    @GetMapping("/test/{id}")
-    private String test(@PathVariable("id") int id) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(new File("src/main/resources/static/json/infoTicket.json"),  ticketsService.findById(id));
-        return "mainpages/buy";
-    }
-
 }

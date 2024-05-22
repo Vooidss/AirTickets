@@ -1,7 +1,7 @@
 package org.AirTickets.security;
 
 import lombok.Getter;
-import org.AirTickets.Entity.User;
+import org.AirTickets.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

@@ -2,7 +2,7 @@ package org.AirTickets.services;
 
 import jakarta.transaction.Transactional;
 import org.AirTickets.Repositories.UsersRepository;
-import org.AirTickets.Entity.User;
+import org.AirTickets.models.User;
 import org.AirTickets.security.UsersDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

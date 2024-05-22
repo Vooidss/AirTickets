@@ -11,3 +11,5 @@ function showRoundTripForm() {
     document.getElementById('secondbut').style.background = '#3d3b3b';
     document.getElementById('firstbut').style.background = '#000000';
 }
+
+//Выпадающий список

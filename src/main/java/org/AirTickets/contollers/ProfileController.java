@@ -1,7 +1,7 @@
 package org.AirTickets.contollers;
 
 import jakarta.validation.Valid;
-import org.AirTickets.Entity.User;
+import org.AirTickets.models.User;
 import org.AirTickets.security.UsersDetails;
 import org.AirTickets.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +40,5 @@ public class ProfileController {
         usersService.update(user);
 
         return "/mainpages/profile";
-    }
-
-    @ResponseBody
-    @GetMapping("/showUserInfo")
-    public String showUserInfo(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UsersDetails usersDetails = (UsersDetails)authentication.getPrincipal();
-
-        return usersDetails.getUsername();
     }
 }

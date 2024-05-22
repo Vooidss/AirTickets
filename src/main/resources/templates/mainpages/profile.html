@@ -25,6 +25,7 @@
 </div>
 <div class="emp-profile">
             <form th:method="PATCH" th:object="${user}" th:action="@{/profile/edit}">
+                <input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
                 <div class="header_container">
                     <div >
                         <div class="profile-head">
@@ -34,7 +35,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Изменить профиль"/>
                     </div>
                 </div>
 

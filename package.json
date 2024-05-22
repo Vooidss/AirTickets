@@ -1,7 +1,0 @@
-{
-  "name": "AirTickets",
-  "version": "1.0.0",
-  "devDependencies": {
-    "axios": "^1.7.1"
-  }
-}

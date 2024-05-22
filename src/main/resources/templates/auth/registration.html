@@ -27,6 +27,7 @@
 	<div class="screen">
 		<div class="screen__content">
 			<form class="login" th:method="POST" th:action="@{/auth/registration}" th:object="${user}">
+				<input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
 				<button href = "/templates/auth/login.html" id = "firstbut" class="button login__submit2">
 					<span class="button__text">Войти</span>
 				</button>

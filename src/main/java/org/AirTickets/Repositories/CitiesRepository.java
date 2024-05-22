@@ -1,6 +1,6 @@
 package org.AirTickets.Repositories;
 
-import org.AirTickets.Entity.Cities;
+import org.AirTickets.models.Cities;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -2,7 +2,7 @@ package org.AirTickets.services;
 
 import jakarta.transaction.Transactional;
 import org.AirTickets.Repositories.CitiesRepository;
-import org.AirTickets.Entity.Cities;
+import org.AirTickets.models.Cities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
