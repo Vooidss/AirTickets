@@ -8,10 +8,13 @@ import org.AirTickets.services.TicketsService;
 import org.AirTickets.services.UsersService;
 import org.AirTickets.util.TicketsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 
 
 @Controller
@@ -57,19 +60,28 @@ public class TicketsContollers {
     }
     @GetMapping("/buy_ticket")
     private String buyTicket(@ModelAttribute("ticket") @Valid Tickets tickets,
-                             BindingResult bindingResult){
+                             BindingResult bindingResult,Model model) throws ParseException {
 
         ticketsValidator.validate(tickets,bindingResult);
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("cities",citiesService.findAll());
+            return "index";
+        }
 
         User user = usersService.getAuthUser();
         tickets.setOwner(user);
         tickets.setPrice(ticketsService.getPrice());
+        tickets.setSendingDate(ticketsService.converDate(tickets.getSendingDate()));
 
+        if(tickets.getArrivalDate() != null) {
+            tickets.setArrivalDate(ticketsService.converDate(tickets.getArrivalDate()));
+        }
         return "mainpages/buy";
     }
 
     @PostMapping("/buy_ticket")
-    public String showInfoTicket(@ModelAttribute("ticket") Tickets ticket){
+    public String showInfoTicket(@ModelAttribute("ticket") Tickets ticket,Model model){
 
 
         User user = usersService.getAuthUser();
@@ -79,6 +91,8 @@ public class TicketsContollers {
         System.out.println(ticket.toString());
 
         ticketsService.save(ticket);
+
+        model.addAttribute("cities",citiesService.findAll());
 
         return "index";
     }

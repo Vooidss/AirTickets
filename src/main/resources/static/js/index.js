@@ -12,4 +12,19 @@ function showRoundTripForm() {
     document.getElementById('firstbut').style.background = '#000000';
 }
 
-//Выпадающий список
+// Профиль
+
+const modal = document.querySelector('#modal');
+const btn = document.querySelector('#openModal');
+const popup = document.querySelector('.popup');
+const account = document.querySelector('.account');
+
+btn.onclick = function () {
+  modal.style.display = 'block';
+  console.log("откр");
+};
+
+popup.onclick = function () {
+  modal.style.display = 'none';
+};
+

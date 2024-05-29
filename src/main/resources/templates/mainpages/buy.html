@@ -18,13 +18,14 @@
             <ul class = "menu">
                 <li><a th:href = "@{/mainpage}"> Главная </a></li>
                 <li><a href = "#"> Помощь </a></li>
-                <li><a href = "#" class="account">Аккаунт</a></li>
+                <li><a class="account" >Аккаунт</a></li>
             </ul>
         </header>
     </section>
 </div>
 <div class="emp-profile">
             <form th:method="POST" th:object="${ticket}" th:action="@{/mainpage/buy_ticket}">
+
                 <input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}"/>
                 <div class="header_container">
                     <div >
@@ -49,7 +50,7 @@
                                                 <label>Место вылета</label>
                                             </div>
                                             <div class = "field">
-                                                <p th:field="*{arrivalCity}" th:text = "*{arrivalCity}">Место вылета</p>
+                                                <p th:field="*{sendingCity}" th:text = "*{sendingCity}">Место вылета</p>
                                             </div>
                                         </div>
                                         <div class = "box" >
@@ -57,7 +58,7 @@
                                                 <label>Место прибытия</label>
                                             </div>
                                             <div class = "field">
-                                                <p th:field="*{sendingCity}" th:text = "*{sendingCity}">Место вылета</p>
+                                                <p th:field="*{arrivalCity}" th:text = "*{arrivalCity}">Место вылета</p>
                                             </div>
                                         </div>
                                         <div class = "box">
@@ -65,7 +66,7 @@
                                                 <label>Дата вылета</label>
                                             </div>
                                             <div class = "field">
-                                                <p th:field="*{arrivalDate}" th:text = "*{arrivalDate}">Дата вылета</p>
+                                                <p th:field="*{sendingDate}" th:text = "*{sendingDate}">Дата вылета</p>
                                             </div>
                                         </div>
                                         <div class = "box">
@@ -73,7 +74,7 @@
                                                 <label>Дата возвращения</label>
                                             </div>
                                             <div class = "field">
-                                                <p th:field="*{sendingDate}" th:text = "*{sendingDate}">Дата возвращения</p>
+                                                <p th:field="*{arrivalDate}" th:text = "*{arrivalDate}">Дата возвращения</p>
                                             </div>
                                         </div>
                                         <div class = "box">
@@ -95,6 +96,5 @@
                 </div>
             </form>
         </div>
-
 </body>
 </html>
