@@ -33,7 +33,8 @@ public class SecurityConfig{
         List<String> listWithAllAllowedLinks = List.of(
                 "/auth/login","/error","/auth/registration",
                 "/css/login.css","/css/registration.css",
-                "/img/logo.png","/img/account.png"
+                "/img/logo.png","/img/account.png",
+                "/logout"
         );
 
         return http
@@ -46,6 +47,10 @@ public class SecurityConfig{
                         .loginProcessingUrl("/process_login")
                         .defaultSuccessUrl("/mainpage",true)
                         .failureUrl("/auth/login?error"))
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/auth/logout")
+                .and()
                 .build();
     }
     @Bean

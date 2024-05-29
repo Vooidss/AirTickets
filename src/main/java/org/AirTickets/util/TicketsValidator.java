@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.Date;
+
 @Component
 public class TicketsValidator  implements Validator {
     @Override
@@ -19,6 +21,14 @@ public class TicketsValidator  implements Validator {
 
         if(!(tickets.getCountpeople() > 0)){
             errors.rejectValue("countpeople","","Количество пассажиров должно быть больше 0");
+        }
+
+        if(tickets.getSendingDate().before(new Date())){
+            errors.rejectValue("sendingDate","","Дата должна не раньше ненешней");
+        }
+
+        if( tickets.getArrivalDate() != null && tickets.getArrivalDate().before(tickets.getSendingDate())){
+            errors.rejectValue("arrivalDate","","Дата прибытия должна быть после даты вылета");
         }
 
     }

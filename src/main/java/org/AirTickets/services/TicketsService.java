@@ -6,6 +6,7 @@ import org.AirTickets.models.Tickets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -37,10 +38,19 @@ public class TicketsService{
         return 1000 + new Random().nextInt((20000 - 1000 + 1)) + " руб";
     }
 
-    public Date converDate(String dateString) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = format.parse(dateString);
+    public Date converDate(Date date) throws ParseException {
 
-        return date;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Преобразуем Date в строку в формате "dd/MM/yyyy"
+        String dateString = dateFormatter.format(date);
+        System.out.println("Formatted Date String: " + dateString);
+
+        // Парсим строку обратно в объект Date
+        Date parsedDate = dateFormat.parse(dateString);
+        System.out.println("Parsed Date: " + parsedDate);
+
+        return parsedDate;
     }
 }
