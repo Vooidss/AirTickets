@@ -8,7 +8,6 @@ import org.AirTickets.services.TicketsService;
 import org.AirTickets.services.UsersService;
 import org.AirTickets.util.TicketsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -72,11 +71,7 @@ public class TicketsContollers {
         User user = usersService.getAuthUser();
         tickets.setOwner(user);
         tickets.setPrice(ticketsService.getPrice());
-        tickets.setSendingDate(ticketsService.converDate(tickets.getSendingDate()));
 
-        if(tickets.getArrivalDate() != null) {
-            tickets.setArrivalDate(ticketsService.converDate(tickets.getArrivalDate()));
-        }
         return "mainpages/buy";
     }
 
@@ -88,7 +83,7 @@ public class TicketsContollers {
         ticket.setOwner(user);
 
         System.out.println("работает");
-        System.out.println(ticket.toString());
+        System.out.println(ticket);
 
         ticketsService.save(ticket);
 
